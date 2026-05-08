@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<title>Korean Card Game</title>
+<style>
+body {
+  font-family: Arial, sans-serif;
+  background: #f5f5f5;
+  text-align: center;
+}
+
+h1 {
+  margin: 20px;
+}
+
+.container {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+  gap: 15px;
+  padding: 20px;
+}
+
+.card {
+  perspective: 1000px;
+}
+
+.card-inner {
+  position: relative;
+  width: 100%;
+  height: 140px;
+  text-align: center;
+  transition: transform 0.6s;
+  transform-style: preserve-3d;
+  cursor: pointer;
+}
+
+.card.flip .card-inner {
+  transform: rotateY(180deg);
+}
+
+.card-front, .card-back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  border-radius: 10px;
+  backface-visibility: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  font-size: 16px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+}
+
+.card-front {
+  background: #ffffff;
+}
+
+.card-back {
+  background: #4CAF50;
+  color: white;
+  transform: rotateY(180deg);
+}
+
+.emoji {
+  font-size: 32px;
+  margin-bottom: 8px;
+}
+</style>
+</head>
+
+<body>
+
+<h1>📚 Korean Card Game</h1>
+
+<div class="container"></div>
+
+<script>
+const words = [
+  {k:"아이", e:"child", emoji:"👶"},
+  {k:"오이", e:"cucumber", emoji:"🥒"},
+  {k:"아기", e:"baby", emoji:"👶"},
+  {k:"나", e:"I, me", emoji:"🙂"},
+  {k:"너", e:"you", emoji:"👤"},
+  {k:"나이", e:"age", emoji:"🎂"},
+  {k:"나비", e:"butterfly", emoji:"🦋"},
+  {k:"다리", e:"leg / bridge", emoji:"🦵"},
+  {k:"나라", e:"country", emoji:"🌍"},
+  {k:"바다", e:"sea", emoji:"🌊"},
+  {k:"모자", e:"hat", emoji:"🧢"},
+  {k:"가게", e:"store", emoji:"🏪"},
+  {k:"가수", e:"singer", emoji:"🎤"},
+  {k:"배우", e:"actor", emoji:"🎬"},
+  {k:"바지", e:"pants", emoji:"👖"},
+  {k:"모래", e:"sand", emoji:"🏖️"},
+  {k:"파도", e:"wave", emoji:"🌊"},
+  {k:"도마", e:"cutting board", emoji:"🔪"},
+  {k:"바나나", e:"banana", emoji:"🍌"},
+  {k:"자두", e:"plum", emoji:"🍑"},
+  {k:"카메라", e:"camera", emoji:"📷"},
+  {k:"코", e:"nose", emoji:"👃"},
+  {k:"노래", e:"song", emoji:"🎵"},
+  {k:"마리아", e:"Maria", emoji:"👧"},
+
+  {k:"가다", e:"to go", emoji:"➡️"},
+  {k:"오다", e:"to come", emoji:"⬅️"},
+  {k:"자다", e:"to sleep", emoji:"😴"},
+  {k:"나가다", e:"to go out", emoji:"🚪"},
+  {k:"보다", e:"to see", emoji:"👀"},
+  {k:"사다", e:"to buy", emoji:"🛒"},
+  {k:"주다", e:"to give", emoji:"🎁"},
+  {k:"자라다", e:"to grow", emoji:"🌱"},
+  {k:"배우다", e:"to learn", emoji:"📘"},
+  {k:"쉬다", e:"to rest", emoji:"🛌"},
+  {k:"서다", e:"to stand", emoji:"🧍"},
+  {k:"나누다", e:"to share", emoji:"🤝"},
+  {k:"다니다", e:"to go regularly", emoji:"🚶"},
+  {k:"마시다", e:"to drink", emoji:"🥤"},
+  {k:"오르다", e:"to go up", emoji:"⬆️"},
+  {k:"자르다", e:"to cut", emoji:"✂️"},
+  {k:"타다", e:"to ride", emoji:"🚗"},
+  {k:"나아가다", e:"to move forward", emoji:"🏃"},
+  {k:"부르다", e:"to sing / to call", emoji:"🎤"},
+
+  {k:"아프다", e:"to be sick", emoji:"🤒"},
+  {k:"크다", e:"to be big", emoji:"📦"},
+  {k:"느리다", e:"to be slow", emoji:"🐢"},
+  {k:"차다", e:"to be cold", emoji:"❄️"}
+];
+
+const container = document.querySelector('.container');
+
+words.forEach(word => {
+  const card = document.createElement("div");
+  card.className = "card";
+
+  card.innerHTML = `
+    <div class="card-inner">
+      <div class="card-front">
+        <div class="emoji">${word.emoji}</div>
+        <div>${word.k}</div>
+      </div>
+      <div class="card-back">
+        ${word.e}
+      </div>
+    </div>
+  `;
+
+  card.addEventListener("click", () => {
+    card.classList.toggle("flip");
+  });
+
+  container.appendChild(card);
+});
+</script>
+
+</body>
+</html>
